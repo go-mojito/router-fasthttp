@@ -10,22 +10,29 @@ import (
 	"github.com/go-mojito/mojito"
 )
 
+const (
+	waitTime        = 1 * time.Second
+	expectedNoError = "Expected no error, got '%s'"
+	expectedBody    = "Expected body 'OK', got '%s'"
+	helloWorld      = "Hello World"
+)
+
 func startServerTest(t *testing.T, r *FastHttpRouter) {
 	go func() {
 		if err := r.ListenAndServe(":8080"); err != nil {
-			t.Errorf("Expected no error, got '%s'", err)
+			t.Errorf(expectedNoError, err)
 		}
 	}()
-	time.Sleep(2 * time.Second)
+	time.Sleep(waitTime)
 }
 
 func startServerBench(b *testing.B, r *FastHttpRouter) {
 	go func() {
 		if err := r.ListenAndServe(":8080"); err != nil {
-			b.Errorf("Expected no error, got '%s'", err)
+			b.Errorf(expectedNoError, err)
 		}
 	}()
-	time.Sleep(2 * time.Second)
+	time.Sleep(waitTime)
 }
 
 func request(method string, path string) (*http.Response, error) {
@@ -54,13 +61,13 @@ func Test_Router_GET(t *testing.T) {
 
 	res, err := request("GET", "/")
 	if err != nil {
-		t.Errorf("Expected no error, got '%s'", err)
+		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
 		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
-		t.Errorf("Expected body 'OK', got '%s'", body)
+		t.Errorf(expectedBody, body)
 	}
 }
 
@@ -75,7 +82,7 @@ func Test_Router_HEAD(t *testing.T) {
 
 	res, err := request("HEAD", "/")
 	if err != nil {
-		t.Errorf("Expected no error, got '%s'", err)
+		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
 		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
@@ -94,13 +101,13 @@ func Test_Router_POST(t *testing.T) {
 
 	res, err := request("POST", "/")
 	if err != nil {
-		t.Errorf("Expected no error, got '%s'", err)
+		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
 		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
-		t.Errorf("Expected body 'OK', got '%s'", body)
+		t.Errorf(expectedBody, body)
 	}
 }
 
@@ -116,13 +123,13 @@ func Test_Router_PUT(t *testing.T) {
 
 	res, err := request("PUT", "/")
 	if err != nil {
-		t.Errorf("Expected no error, got '%s'", err)
+		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
 		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
-		t.Errorf("Expected body 'OK', got '%s'", body)
+		t.Errorf(expectedBody, body)
 	}
 }
 
@@ -138,13 +145,13 @@ func Test_Router_DELETE(t *testing.T) {
 
 	res, err := request("DELETE", "/")
 	if err != nil {
-		t.Errorf("Expected no error, got '%s'", err)
+		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
 		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
-		t.Errorf("Expected body 'OK', got '%s'", body)
+		t.Errorf(expectedBody, body)
 	}
 }
 
@@ -160,13 +167,13 @@ func Test_Router_CONNECT(t *testing.T) {
 
 	res, err := request("CONNECT", "/")
 	if err != nil {
-		t.Errorf("Expected no error, got '%s'", err)
+		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
 		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
-		t.Errorf("Expected body 'OK', got '%s'", body)
+		t.Errorf(expectedBody, body)
 	}
 }
 
@@ -182,13 +189,13 @@ func Test_Router_OPTIONS(t *testing.T) {
 
 	res, err := request("OPTIONS", "/")
 	if err != nil {
-		t.Errorf("Expected no error, got '%s'", err)
+		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
 		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
-		t.Errorf("Expected body 'OK', got '%s'", body)
+		t.Errorf(expectedBody, body)
 	}
 }
 
@@ -204,13 +211,13 @@ func Test_Router_TRACE(t *testing.T) {
 
 	res, err := request("TRACE", "/")
 	if err != nil {
-		t.Errorf("Expected no error, got '%s'", err)
+		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
 		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
-		t.Errorf("Expected body 'OK', got '%s'", body)
+		t.Errorf(expectedBody, body)
 	}
 }
 
@@ -226,13 +233,13 @@ func Test_Router_PATCH(t *testing.T) {
 
 	res, err := request("PATCH", "/")
 	if err != nil {
-		t.Errorf("Expected no error, got '%s'", err)
+		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
 		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
-		t.Errorf("Expected body 'OK', got '%s'", body)
+		t.Errorf(expectedBody, body)
 	}
 }
 
@@ -245,28 +252,28 @@ func Test_Router_AsDefault(t *testing.T) {
 
 	go func() {
 		if err := mojito.ListenAndServe(":8080"); err != nil {
-			t.Errorf("Expected no error, got '%s'", err)
+			t.Errorf(expectedNoError, err)
 		}
 	}()
-	time.Sleep(2 * time.Second)
+	time.Sleep(waitTime)
 	defer mojito.Shutdown()
 
 	res, err := request("GET", "/")
 	if err != nil {
-		t.Errorf("Expected no error, got '%s'", err)
+		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
 		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
-		t.Errorf("Expected body 'OK', got '%s'", body)
+		t.Errorf(expectedBody, body)
 	}
 }
 
 func Benchmark_Router_Handler(b *testing.B) {
 	r := NewFastHttpRouter()
 	r.GET("/", func(req mojito.Request, res mojito.Response) error {
-		res.String("Hello World")
+		res.String(helloWorld)
 		return nil
 	})
 
@@ -283,7 +290,7 @@ func Benchmark_Router_Handler(b *testing.B) {
 func Benchmark_Router_Handler_Not_Found(b *testing.B) {
 	r := NewFastHttpRouter()
 	r.GET("/", func(req mojito.Request, res mojito.Response) error {
-		res.String("Hello World")
+		res.String(helloWorld)
 		return nil
 	})
 
@@ -316,7 +323,7 @@ func Benchmark_Router_Handler_With_Middleware(b *testing.B) {
 		return next()
 	})
 	r.GET("/", func(ctx mojito.Context) error {
-		ctx.String("Hello World")
+		ctx.String(helloWorld)
 		return nil
 	})
 
