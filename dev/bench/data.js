@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1651699955689,
+  "lastUpdate": 1651700921904,
   "repoUrl": "https://github.com/go-mojito/router-fasthttp",
   "entries": {
     "Benchmark": [
@@ -84,6 +84,48 @@ window.BENCHMARK_DATA = {
             "value": 309087,
             "unit": "ns/op\t   29409 B/op\t     181 allocs/op",
             "extra": "3380 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "0skillallluck@pm.me",
+            "name": "Cedric Lewe",
+            "username": "0SkillAllLuck"
+          },
+          "committer": {
+            "email": "0skillallluck@pm.me",
+            "name": "Cedric Lewe",
+            "username": "0SkillAllLuck"
+          },
+          "distinct": true,
+          "id": "f40efe3e01727ef61445417d1a47ee0e147ea52f",
+          "message": "fix(test): Fix default test",
+          "timestamp": "2022-05-04T23:47:44+02:00",
+          "tree_id": "bdb3df70417750f7c567c57b1236b55bdf221971",
+          "url": "https://github.com/go-mojito/router-fasthttp/commit/f40efe3e01727ef61445417d1a47ee0e147ea52f"
+        },
+        "date": 1651700920687,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 581478,
+            "unit": "ns/op\t   31181 B/op\t     216 allocs/op",
+            "extra": "2064 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 493246,
+            "unit": "ns/op\t   29346 B/op\t     181 allocs/op",
+            "extra": "2256 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware",
+            "value": 477278,
+            "unit": "ns/op\t   29444 B/op\t     181 allocs/op",
+            "extra": "2635 times\n2 procs"
           }
         ]
       }
