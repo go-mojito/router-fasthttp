@@ -243,7 +243,12 @@ func Test_Router_AsDefault(t *testing.T) {
 		return nil
 	})
 
-	startServerTest(t, r)
+	go func() {
+		if err := mojito.ListenAndServe(":8080"); err != nil {
+			t.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer mojito.Shutdown()
 
 	res, err := request("GET", "/")
