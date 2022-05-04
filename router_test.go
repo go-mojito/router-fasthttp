@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"net/url"
 	"testing"
+	"time"
 
 	"github.com/go-mojito/mojito"
 )
@@ -29,7 +30,13 @@ func Test_Router_GET(t *testing.T) {
 		res.String("OK")
 		return nil
 	})
-	go r.ListenAndServe(":8080")
+
+	go func() {
+		if err := r.ListenAndServe(":8080"); err != nil {
+			t.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer r.Shutdown()
 
 	res, err := request("GET", "/")
@@ -49,7 +56,13 @@ func Test_Router_HEAD(t *testing.T) {
 	r.HEAD("/", func(req mojito.Request, res mojito.Response) error {
 		return nil
 	})
-	go r.ListenAndServe(":8080")
+
+	go func() {
+		if err := r.ListenAndServe(":8080"); err != nil {
+			t.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer r.Shutdown()
 
 	res, err := request("HEAD", "/")
@@ -67,7 +80,13 @@ func Test_Router_POST(t *testing.T) {
 		res.String("OK")
 		return nil
 	})
-	go r.ListenAndServe(":8080")
+
+	go func() {
+		if err := r.ListenAndServe(":8080"); err != nil {
+			t.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer r.Shutdown()
 
 	res, err := request("POST", "/")
@@ -88,7 +107,13 @@ func Test_Router_PUT(t *testing.T) {
 		res.String("OK")
 		return nil
 	})
-	go r.ListenAndServe(":8080")
+
+	go func() {
+		if err := r.ListenAndServe(":8080"); err != nil {
+			t.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer r.Shutdown()
 
 	res, err := request("PUT", "/")
@@ -109,7 +134,13 @@ func Test_Router_DELETE(t *testing.T) {
 		res.String("OK")
 		return nil
 	})
-	go r.ListenAndServe(":8080")
+
+	go func() {
+		if err := r.ListenAndServe(":8080"); err != nil {
+			t.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer r.Shutdown()
 
 	res, err := request("DELETE", "/")
@@ -130,7 +161,13 @@ func Test_Router_CONNECT(t *testing.T) {
 		res.String("OK")
 		return nil
 	})
-	go r.ListenAndServe(":8080")
+
+	go func() {
+		if err := r.ListenAndServe(":8080"); err != nil {
+			t.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer r.Shutdown()
 
 	res, err := request("CONNECT", "/")
@@ -151,7 +188,13 @@ func Test_Router_OPTIONS(t *testing.T) {
 		res.String("OK")
 		return nil
 	})
-	go r.ListenAndServe(":8080")
+
+	go func() {
+		if err := r.ListenAndServe(":8080"); err != nil {
+			t.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer r.Shutdown()
 
 	res, err := request("OPTIONS", "/")
@@ -172,7 +215,13 @@ func Test_Router_TRACE(t *testing.T) {
 		res.String("OK")
 		return nil
 	})
-	go r.ListenAndServe(":8080")
+
+	go func() {
+		if err := r.ListenAndServe(":8080"); err != nil {
+			t.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer r.Shutdown()
 
 	res, err := request("TRACE", "/")
@@ -193,7 +242,13 @@ func Test_Router_PATCH(t *testing.T) {
 		res.String("OK")
 		return nil
 	})
-	go r.ListenAndServe(":8080")
+
+	go func() {
+		if err := r.ListenAndServe(":8080"); err != nil {
+			t.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer r.Shutdown()
 
 	res, err := request("PATCH", "/")
@@ -214,7 +269,13 @@ func Test_Router_AsDefault(t *testing.T) {
 		res.String("OK")
 		return nil
 	})
-	go mojito.ListenAndServe(":8080")
+
+	go func() {
+		if err := mojito.ListenAndServe(":8080"); err != nil {
+			t.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer mojito.Shutdown()
 
 	res, err := request("GET", "/")
@@ -235,7 +296,13 @@ func Benchmark_Router_Handler(b *testing.B) {
 		res.String("Hello World")
 		return nil
 	})
-	go r.ListenAndServe(":8080")
+
+	go func() {
+		if err := r.ListenAndServe(":8080"); err != nil {
+			b.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer r.Shutdown()
 
 	b.ResetTimer()
@@ -251,7 +318,13 @@ func Benchmark_Router_Handler_Not_Found(b *testing.B) {
 		res.String("Hello World")
 		return nil
 	})
-	go r.ListenAndServe(":8080")
+
+	go func() {
+		if err := r.ListenAndServe(":8080"); err != nil {
+			b.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer r.Shutdown()
 
 	b.ResetTimer()
@@ -283,7 +356,13 @@ func Benchmark_Router_Handler_With_Middleware(b *testing.B) {
 		ctx.String("Hello World")
 		return nil
 	})
-	go r.ListenAndServe(":8080")
+
+	go func() {
+		if err := r.ListenAndServe(":8080"); err != nil {
+			b.Errorf("Expected no error, got '%s'", err)
+		}
+	}()
+	time.Sleep(2 * time.Second)
 	defer r.Shutdown()
 
 	b.ResetTimer()
