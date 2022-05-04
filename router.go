@@ -6,7 +6,6 @@ import (
 	"regexp"
 
 	fhttpRouter "github.com/fasthttp/router"
-	"github.com/go-mojito/mojito"
 	"github.com/go-mojito/mojito/log"
 	"github.com/go-mojito/mojito/pkg/router"
 	"github.com/infinytum/structures"
@@ -22,7 +21,7 @@ type FastHttpRouter struct {
 }
 
 // NewFastHttpRouter will create new instance of the mojito fasthttp router implementation
-func NewFastHttpRouter() mojito.Router {
+func NewFastHttpRouter() *FastHttpRouter {
 	return &FastHttpRouter{
 		Miiddleware: make([]interface{}, 0),
 		Routes:      structures.NewTable[string, string, router.Handler](),
