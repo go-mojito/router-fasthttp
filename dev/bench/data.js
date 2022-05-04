@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1651700921904,
+  "lastUpdate": 1651701134243,
   "repoUrl": "https://github.com/go-mojito/router-fasthttp",
   "entries": {
     "Benchmark": [
@@ -126,6 +126,48 @@ window.BENCHMARK_DATA = {
             "value": 477278,
             "unit": "ns/op\t   29444 B/op\t     181 allocs/op",
             "extra": "2635 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "0skillallluck@pm.me",
+            "name": "Cedric Lewe",
+            "username": "0SkillAllLuck"
+          },
+          "committer": {
+            "email": "0skillallluck@pm.me",
+            "name": "Cedric Lewe",
+            "username": "0SkillAllLuck"
+          },
+          "distinct": true,
+          "id": "c665afba13deef244814040dfeda60524b84428f",
+          "message": "fix(test): Make constants",
+          "timestamp": "2022-05-04T23:51:12+02:00",
+          "tree_id": "755894cd496a876d9d463610ae78146dad1d0003",
+          "url": "https://github.com/go-mojito/router-fasthttp/commit/c665afba13deef244814040dfeda60524b84428f"
+        },
+        "date": 1651701133157,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 285931,
+            "unit": "ns/op\t   30849 B/op\t     214 allocs/op",
+            "extra": "3782 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 273892,
+            "unit": "ns/op\t   29332 B/op\t     181 allocs/op",
+            "extra": "4616 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware",
+            "value": 765646,
+            "unit": "ns/op\t   29418 B/op\t     181 allocs/op",
+            "extra": "4544 times\n2 procs"
           }
         ]
       }
