@@ -13,6 +13,7 @@ import (
 const (
 	waitTime        = 1 * time.Second
 	expectedNoError = "Expected no error, got '%s'"
+	expectedStatus  = "Expected status code 200, got '%d'"
 	expectedBody    = "Expected body 'OK', got '%s'"
 	helloWorld      = "Hello World"
 )
@@ -64,7 +65,7 @@ func Test_Router_GET(t *testing.T) {
 		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
-		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
+		t.Errorf(expectedStatus, res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
@@ -85,7 +86,7 @@ func Test_Router_HEAD(t *testing.T) {
 		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
-		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
+		t.Errorf(expectedStatus, res.StatusCode)
 	}
 }
 
@@ -104,7 +105,7 @@ func Test_Router_POST(t *testing.T) {
 		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
-		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
+		t.Errorf(expectedStatus, res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
@@ -126,7 +127,7 @@ func Test_Router_PUT(t *testing.T) {
 		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
-		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
+		t.Errorf(expectedStatus, res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
@@ -148,7 +149,7 @@ func Test_Router_DELETE(t *testing.T) {
 		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
-		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
+		t.Errorf(expectedStatus, res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
@@ -170,7 +171,7 @@ func Test_Router_CONNECT(t *testing.T) {
 		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
-		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
+		t.Errorf(expectedStatus, res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
@@ -192,7 +193,7 @@ func Test_Router_OPTIONS(t *testing.T) {
 		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
-		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
+		t.Errorf(expectedStatus, res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
@@ -214,7 +215,7 @@ func Test_Router_TRACE(t *testing.T) {
 		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
-		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
+		t.Errorf(expectedStatus, res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
@@ -236,7 +237,7 @@ func Test_Router_PATCH(t *testing.T) {
 		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
-		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
+		t.Errorf(expectedStatus, res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
@@ -263,7 +264,7 @@ func Test_Router_AsDefault(t *testing.T) {
 		t.Errorf(expectedNoError, err)
 	}
 	if res.StatusCode != 200 {
-		t.Errorf("Expected status code 200, got '%d'", res.StatusCode)
+		t.Errorf(expectedStatus, res.StatusCode)
 	}
 	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
