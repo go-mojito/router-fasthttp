@@ -2,13 +2,11 @@ github.com/andybalholm/brotli v1.0.4 h1:V7DdXeJtZscaqfNuAdSRuRFzuiKlHSC/Zh3zl9qY
 github.com/andybalholm/brotli v1.0.4/go.mod h1:fO7iG3H7G2nSZ7m0zPUDn85XEX2GTukHGRSepvi9Eig=
 github.com/fasthttp/router v1.4.8 h1:4zj4sAzXibjA6ZW19MdMe3GaYD1SM+TXrMLzHcVMBOI=
 github.com/fasthttp/router v1.4.8/go.mod h1:UUtJdXFYlqYRQ32EAtWOvNYIZ1XfyC5JJIknWai6foI=
-github.com/go-mojito/mojito v0.0.1 h1:UA04gSD+dqP3XMmfZtMSug79OCfTbfIefe0U0yieX7k=
-github.com/go-mojito/mojito v0.0.1/go.mod h1:zrxadGUw1JJjkkadzzAPE4JntL8BIJddGqwxqjGsNTg=
+github.com/go-mojito/mojito v0.0.2 h1:q242m3zfsXGHEEzd7kcJpIbPr0hRn1coSXlHsKvUVTw=
+github.com/go-mojito/mojito v0.0.2/go.mod h1:aW1MES5qa7st3w4DDxmUnGYWIJKjntjZ+Z7cyAeatt0=
 github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/infinytum/injector v0.0.1 h1:MYHfr75NAeQ66YKDYaer6BgHLbD/UD3o/mCTZcEnXjA=
 github.com/infinytum/injector v0.0.1/go.mod h1:/8absiTs7Afl21cGagOLkXPrypVGZrOSkH4qu/IsP28=
-github.com/infinytum/structures v0.0.1 h1:DgwnAkvodCn2Zn07/PGM+vZZIlhCZJ+602KudwbQSt8=
-github.com/infinytum/structures v0.0.1/go.mod h1:4vDl7BamOX2fF0B+h2n/xGIorGv1u9ZQ9wgF6IW/Kc8=
 github.com/infinytum/structures v0.0.2 h1:h/0EvNICrqynCKaKoO/6djR+cPLS2wj8KHAzPt0r4k0=
 github.com/infinytum/structures v0.0.2/go.mod h1:4vDl7BamOX2fF0B+h2n/xGIorGv1u9ZQ9wgF6IW/Kc8=
 github.com/klauspost/compress v1.15.0 h1:xqfchp4whNFxn5A4XFyyYtitiWI8Hy5EW59jEwcyL6U=
