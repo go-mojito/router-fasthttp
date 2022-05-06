@@ -2,6 +2,7 @@ package fasthttp
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 	"regexp"
 
@@ -9,118 +10,82 @@ import (
 	"github.com/go-mojito/mojito/log"
 	"github.com/go-mojito/mojito/pkg/router"
 	"github.com/infinytum/structures"
+	"github.com/valyala/fasthttp"
 	fhttp "github.com/valyala/fasthttp"
+	"github.com/valyala/fasthttp/fasthttpadaptor"
 )
 
-// FastHttpRouter is a router implementation based on fasthttp
-type FastHttpRouter struct {
-	Miiddleware []interface{}
-	Routes      structures.Table[string, string, router.Handler]
+// Router is a router implementation based on fasthttp
+type Router struct {
+	Middleware []interface{}
+	Routes     structures.Table[string, string, router.Handler]
 	*fhttp.Server
 	*fhttpRouter.Router
 }
 
-// NewFastHttpRouter will create new instance of the mojito fasthttp router implementation
-func NewFastHttpRouter() *FastHttpRouter {
-	return &FastHttpRouter{
-		Miiddleware: make([]interface{}, 0),
-		Routes:      structures.NewTable[string, string, router.Handler](),
-		Router:      fhttpRouter.New(),
+// NewRouter will create new instance of the mojito fasthttp router implementation
+func NewRouter() *Router {
+	return &Router{
+		Middleware: make([]interface{}, 0),
+		Routes:     structures.NewTable[string, string, router.Handler](),
+		Router:     fhttpRouter.New(),
 	}
 }
 
 // GET will add a route to this router for the get method
-func (r *FastHttpRouter) GET(path string, handler interface{}) error {
+func (r *Router) GET(path string, handler interface{}) error {
 	return r.WithRoute(http.MethodGet, path, handler)
 }
 
 // HEAD will add a route to this router for the head method
-func (r *FastHttpRouter) HEAD(path string, handler interface{}) error {
+func (r *Router) HEAD(path string, handler interface{}) error {
 	return r.WithRoute(http.MethodHead, path, handler)
 }
 
 // POST will add a route to this router for the post method
-func (r *FastHttpRouter) POST(path string, handler interface{}) error {
+func (r *Router) POST(path string, handler interface{}) error {
 	return r.WithRoute(http.MethodPost, path, handler)
 }
 
 // PUT will add a route to this router for the put method
-func (r *FastHttpRouter) PUT(path string, handler interface{}) error {
+func (r *Router) PUT(path string, handler interface{}) error {
 	return r.WithRoute(http.MethodPut, path, handler)
 }
 
 // DELETE will add a route to this router for the delete method
-func (r *FastHttpRouter) DELETE(path string, handler interface{}) error {
+func (r *Router) DELETE(path string, handler interface{}) error {
 	return r.WithRoute(http.MethodDelete, path, handler)
 }
 
 // CONNECT will add a route to this router for the connect method
-func (r *FastHttpRouter) CONNECT(path string, handler interface{}) error {
+func (r *Router) CONNECT(path string, handler interface{}) error {
 	return r.WithRoute(http.MethodConnect, path, handler)
 }
 
 // OPTIONS will add a route to this router for the options method
-func (r *FastHttpRouter) OPTIONS(path string, handler interface{}) error {
+func (r *Router) OPTIONS(path string, handler interface{}) error {
 	return r.WithRoute(http.MethodOptions, path, handler)
 }
 
 // TRACE will add a route to this router for the trace method
-func (r *FastHttpRouter) TRACE(path string, handler interface{}) error {
+func (r *Router) TRACE(path string, handler interface{}) error {
 	return r.WithRoute(http.MethodTrace, path, handler)
 }
 
 // PATCH will add a route to this router for the patch method
-func (r *FastHttpRouter) PATCH(path string, handler interface{}) error {
+func (r *Router) PATCH(path string, handler interface{}) error {
 	return r.WithRoute(http.MethodPatch, path, handler)
 }
 
-// WithDefaultHandler will set the default handler for the router
-func (r *FastHttpRouter) WithDefaultHandler(handler interface{}) error {
-	if h, err := router.GetOrCreateHandler(handler); err != nil {
-		log.Errorf("Error creating default handler: %s", err)
-		return err
-	} else {
-		r.Router.NotFound = WithMojitoHandler(h)
-	}
-	return nil
-}
-
-// WithErrorHandler will set the error handler for the router
-func (r *FastHttpRouter) WithErrorHandler(handler interface{}) error {
-	if h, err := router.GetOrCreateHandler(handler); err != nil {
-		log.Errorf("Error creating error handler: %s", err)
-		return err
-	} else {
-		r.Router.PanicHandler = func(ctx *fhttp.RequestCtx, _ interface{}) {
-			WithMojitoHandler(h)(ctx)
-		}
-	}
-	return nil
-}
-
 // WithGroup will create a new route group for the given prefix
-func (r *FastHttpRouter) WithGroup(path string, callback func(group router.Group)) error {
+func (r *Router) WithGroup(path string, callback func(group router.Group)) error {
 	rg := router.NewGroup()
 	callback(rg)
 	return rg.ApplyToRouter(r, path)
 }
 
-// WithMiddleware will add a middleware to the router
-func (r *FastHttpRouter) WithMiddleware(handler interface{}) error {
-	for _, rm := range r.Routes.ToMap() {
-		for _, h := range rm {
-			if err := h.AddMiddleware(handler); err != nil {
-				log.Error(err)
-				return err
-			}
-		}
-	}
-	r.Miiddleware = append(r.Miiddleware, handler)
-	return nil
-}
-
 // WithRoute will add a new route with the given RouteMethod to the router
-func (r *FastHttpRouter) WithRoute(method string, path string, handler interface{}) error {
+func (r *Router) WithRoute(method string, path string, handler interface{}) error {
 	h, err := router.GetOrCreateHandler(handler)
 	if err != nil {
 		log.Field("method", method).Field("path", path).Errorf("Error creating rotue handler: %s", err)
@@ -128,7 +93,7 @@ func (r *FastHttpRouter) WithRoute(method string, path string, handler interface
 	}
 
 	// Chain router-wide middleware to the (new) handler
-	for _, middleware := range r.Miiddleware {
+	for _, middleware := range r.Middleware {
 		if err := h.AddMiddleware(middleware); err != nil {
 			log.Field("method", method).Field("path", path).Errorf("Failed to chain middleware to route: %s", err)
 			return err
@@ -144,23 +109,23 @@ func (r *FastHttpRouter) WithRoute(method string, path string, handler interface
 
 	switch method {
 	case http.MethodGet:
-		r.Router.GET(path, WithMojitoHandler(h))
+		r.Router.GET(path, withMojitoHandler(h))
 	case http.MethodHead:
-		r.Router.HEAD(path, WithMojitoHandler(h))
+		r.Router.HEAD(path, withMojitoHandler(h))
 	case http.MethodPost:
-		r.Router.POST(path, WithMojitoHandler(h))
+		r.Router.POST(path, withMojitoHandler(h))
 	case http.MethodPut:
-		r.Router.PUT(path, WithMojitoHandler(h))
+		r.Router.PUT(path, withMojitoHandler(h))
 	case http.MethodDelete:
-		r.Router.DELETE(path, WithMojitoHandler(h))
+		r.Router.DELETE(path, withMojitoHandler(h))
 	case http.MethodConnect:
-		r.Router.CONNECT(path, WithMojitoHandler(h))
+		r.Router.CONNECT(path, withMojitoHandler(h))
 	case http.MethodOptions:
-		r.Router.OPTIONS(path, WithMojitoHandler(h))
+		r.Router.OPTIONS(path, withMojitoHandler(h))
 	case http.MethodTrace:
-		r.Router.TRACE(path, WithMojitoHandler(h))
+		r.Router.TRACE(path, withMojitoHandler(h))
 	case http.MethodPatch:
-		r.Router.PATCH(path, WithMojitoHandler(h))
+		r.Router.PATCH(path, withMojitoHandler(h))
 	default:
 		log.Field("method", method).Field("path", path).Error("The fasthttp router implementation unfortunately does not support this HTTP method")
 		return errors.New("the given HTTP method is not available on this router")
@@ -169,8 +134,57 @@ func (r *FastHttpRouter) WithRoute(method string, path string, handler interface
 	return nil
 }
 
+// WithNotFoundHandler will set the not found handler for the router
+func (r *Router) WithNotFoundHandler(handler interface{}) error {
+	if h, err := router.GetOrCreateHandler(handler); err != nil {
+		log.Errorf("Error creating default handler: %s", err)
+		return err
+	} else {
+		r.Router.NotFound = withMojitoHandler(h)
+	}
+	return nil
+}
+
+// WithMethodNotAllowedHandler will set the not allowed handler for the router
+func (r *Router) WithMethodNotAllowedHandler(handler interface{}) error {
+	if h, err := router.GetOrCreateHandler(handler); err != nil {
+		log.Errorf("Error creating default handler: %s", err)
+		return err
+	} else {
+		r.Router.MethodNotAllowed = withMojitoHandler(h)
+	}
+	return nil
+}
+
+// WithErrorHandler will set the error handler for the router
+func (r *Router) WithErrorHandler(handler interface{}) error {
+	if h, err := router.GetOrCreateHandler(handler); err != nil {
+		log.Errorf("Error creating error handler: %s", err)
+		return err
+	} else {
+		r.Router.PanicHandler = func(ctx *fhttp.RequestCtx, _ interface{}) {
+			withMojitoHandler(h)(ctx)
+		}
+	}
+	return nil
+}
+
+// WithMiddleware will add a middleware to the router
+func (r *Router) WithMiddleware(handler interface{}) error {
+	for _, rm := range r.Routes.ToMap() {
+		for _, h := range rm {
+			if err := h.AddMiddleware(handler); err != nil {
+				log.Error(err)
+				return err
+			}
+		}
+	}
+	r.Middleware = append(r.Middleware, handler)
+	return nil
+}
+
 // ListenAndServe will start an HTTP webserver on the given address
-func (r *FastHttpRouter) ListenAndServe(address string) error {
+func (r *Router) ListenAndServe(address string) error {
 	r.Server = &fhttp.Server{
 		Handler: r.Router.Handler,
 	}
@@ -178,6 +192,29 @@ func (r *FastHttpRouter) ListenAndServe(address string) error {
 }
 
 // Shutdown will gracefully shutdown the router
-func (r *FastHttpRouter) Shutdown() error {
+func (r *Router) Shutdown() error {
 	return r.Server.Shutdown()
+}
+
+func withMojitoHandler(handler router.Handler) fasthttp.RequestHandler {
+	return func(reqCtx *fasthttp.RequestCtx) {
+		httpReq := &http.Request{}
+		if err := fasthttpadaptor.ConvertRequest(reqCtx, httpReq, true); err != nil {
+			reqCtx.Error(err.Error(), http.StatusInternalServerError)
+			return
+		}
+		req := router.NewRequest(httpReq)
+
+		params := make(map[string]string)
+		reqCtx.VisitUserValues(func(key []byte, value interface{}) {
+			params[string(key)] = fmt.Sprint(value)
+		})
+		req.SetParams(params)
+
+		res := router.NewResponse(NewResponse(reqCtx))
+		ctx := router.NewContext(req, res)
+		if err := handler.Serve(ctx); err != nil {
+			panic(err)
+		}
+	}
 }
