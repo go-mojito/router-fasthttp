@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1651796342140,
+  "lastUpdate": 1651796609174,
   "repoUrl": "https://github.com/go-mojito/router-fasthttp",
   "entries": {
     "Benchmark": [
@@ -258,6 +258,54 @@ window.BENCHMARK_DATA = {
             "value": 454495,
             "unit": "ns/op\t   29249 B/op\t     181 allocs/op",
             "extra": "2528 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "0skillallluck@pm.me",
+            "name": "Cedric Lewe",
+            "username": "0SkillAllLuck"
+          },
+          "committer": {
+            "email": "0skillallluck@pm.me",
+            "name": "Cedric Lewe",
+            "username": "0SkillAllLuck"
+          },
+          "distinct": true,
+          "id": "437af4117a400789bea865a651926d7c612b0764",
+          "message": "fix(bench): Fix typo",
+          "timestamp": "2022-05-06T02:22:41+02:00",
+          "tree_id": "4e1b2520d3820041f0bef473315ee05381ffb837",
+          "url": "https://github.com/go-mojito/router-fasthttp/commit/437af4117a400789bea865a651926d7c612b0764"
+        },
+        "date": 1651796608204,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 461339,
+            "unit": "ns/op\t   31019 B/op\t     210 allocs/op",
+            "extra": "2598 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 293085,
+            "unit": "ns/op\t   29352 B/op\t     180 allocs/op",
+            "extra": "3926 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_1",
+            "value": 292422,
+            "unit": "ns/op\t   29391 B/op\t     181 allocs/op",
+            "extra": "3673 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_5",
+            "value": 1708071,
+            "unit": "ns/op\t   29251 B/op\t     181 allocs/op",
+            "extra": "3579 times\n2 procs"
           }
         ]
       }
