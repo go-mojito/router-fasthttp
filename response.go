@@ -1,6 +1,8 @@
 package fasthttp
 
 import (
+	"bufio"
+	"net"
 	"net/http"
 
 	"github.com/valyala/fasthttp"
@@ -14,6 +16,10 @@ type Response struct {
 
 func (r *Response) Header() http.Header {
 	return r.header
+}
+
+func (r *Response) Hijack() (net.Conn, *bufio.ReadWriter, error) {
+	return r.ctx.Conn(), bufio.NewReadWriter(bufio.NewReader(r.ctx.Conn()), bufio.NewWriter(r.ctx.Conn())), nil
 }
 
 func (r *Response) Write(body []byte) (int, error) {
