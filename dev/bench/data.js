@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1652810022577,
+  "lastUpdate": 1652810049445,
   "repoUrl": "https://github.com/go-mojito/router-fasthttp",
   "entries": {
     "Benchmark": [
@@ -882,6 +882,150 @@ window.BENCHMARK_DATA = {
             "value": 2519156,
             "unit": "ns/op\t   29297 B/op\t     181 allocs/op",
             "extra": "458 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "05ea69ce2f056ba1bd75db69f196707f9d832998",
+          "message": "build(deps): Bump github.com/go-mojito/mojito from 0.0.4 to 0.0.7 (#4)\n\nBumps [github.com/go-mojito/mojito](https://github.com/go-mojito/mojito) from 0.0.4 to 0.0.7.\n- [Release notes](https://github.com/go-mojito/mojito/releases)\n- [Commits](https://github.com/go-mojito/mojito/compare/v0.0.4...v0.0.7)\n\n---\nupdated-dependencies:\n- dependency-name: github.com/go-mojito/mojito\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\n\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2022-05-17T19:52:48+02:00",
+          "tree_id": "6348d8822d84eaa2648787ad160adea7a332830e",
+          "url": "https://github.com/go-mojito/router-fasthttp/commit/05ea69ce2f056ba1bd75db69f196707f9d832998"
+        },
+        "date": 1652810047629,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 284309,
+            "unit": "ns/op\t   30829 B/op\t     210 allocs/op",
+            "extra": "3776 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 284316,
+            "unit": "ns/op\t   30779 B/op\t     211 allocs/op",
+            "extra": "4284 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 566442,
+            "unit": "ns/op\t   30821 B/op\t     211 allocs/op",
+            "extra": "4230 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 1552640,
+            "unit": "ns/op\t   29721 B/op\t     208 allocs/op",
+            "extra": "753 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 1589815,
+            "unit": "ns/op\t   29718 B/op\t     208 allocs/op",
+            "extra": "751 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 1594868,
+            "unit": "ns/op\t   29641 B/op\t     181 allocs/op",
+            "extra": "745 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 1607660,
+            "unit": "ns/op\t   29204 B/op\t     181 allocs/op",
+            "extra": "728 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 1642872,
+            "unit": "ns/op\t   29211 B/op\t     181 allocs/op",
+            "extra": "714 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 1649056,
+            "unit": "ns/op\t   29213 B/op\t     181 allocs/op",
+            "extra": "706 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 1651701,
+            "unit": "ns/op\t   29220 B/op\t     181 allocs/op",
+            "extra": "717 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_1",
+            "value": 1705721,
+            "unit": "ns/op\t   29855 B/op\t     181 allocs/op",
+            "extra": "698 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_1",
+            "value": 1724587,
+            "unit": "ns/op\t   29224 B/op\t     181 allocs/op",
+            "extra": "680 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_1",
+            "value": 1777879,
+            "unit": "ns/op\t   29231 B/op\t     181 allocs/op",
+            "extra": "666 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_1",
+            "value": 1783593,
+            "unit": "ns/op\t   29247 B/op\t     181 allocs/op",
+            "extra": "676 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_1",
+            "value": 1825683,
+            "unit": "ns/op\t   29231 B/op\t     181 allocs/op",
+            "extra": "655 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_5",
+            "value": 1842916,
+            "unit": "ns/op\t   29245 B/op\t     181 allocs/op",
+            "extra": "642 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_5",
+            "value": 1891018,
+            "unit": "ns/op\t   29239 B/op\t     181 allocs/op",
+            "extra": "622 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_5",
+            "value": 1887031,
+            "unit": "ns/op\t   31219 B/op\t     181 allocs/op",
+            "extra": "637 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_5",
+            "value": 1902987,
+            "unit": "ns/op\t   30142 B/op\t     181 allocs/op",
+            "extra": "608 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_5",
+            "value": 4075776,
+            "unit": "ns/op\t   23500 B/op\t     161 allocs/op",
+            "extra": "591 times\n2 procs"
           }
         ]
       }
