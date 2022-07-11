@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/fasthttp/router v1.4.10
-	github.com/go-mojito/mojito v0.0.8
+	github.com/go-mojito/mojito v0.0.9
 	github.com/infinytum/structures v0.0.2
 	github.com/valyala/fasthttp v1.38.0
 )
