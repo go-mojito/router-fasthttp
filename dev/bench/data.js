@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1659223559030,
+  "lastUpdate": 1659224601666,
   "repoUrl": "https://github.com/go-mojito/router-fasthttp",
   "entries": {
     "Benchmark": [
@@ -2082,6 +2082,54 @@ window.BENCHMARK_DATA = {
             "value": 1479538,
             "unit": "ns/op\t   28389 B/op\t     178 allocs/op",
             "extra": "793 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "0SkillAllLuck@pm.me",
+            "name": "Cedric Lewe",
+            "username": "0SkillAllLuck"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "aba174d0e52c2137bbb1f78155f9012637e38a8b",
+          "message": "fix(security): Forward error on adding routes (#14)\n\n* fix(security): Forward error on adding routes\r\n\r\n* fix(security): Simplify code",
+          "timestamp": "2022-07-31T01:42:41+02:00",
+          "tree_id": "203265324b69a2a1beec7dbde0b2f0d649c820a6",
+          "url": "https://github.com/go-mojito/router-fasthttp/commit/aba174d0e52c2137bbb1f78155f9012637e38a8b"
+        },
+        "date": 1659224601301,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 333144,
+            "unit": "ns/op\t   30969 B/op\t     212 allocs/op",
+            "extra": "3246 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 310113,
+            "unit": "ns/op\t   29537 B/op\t     181 allocs/op",
+            "extra": "3645 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_1",
+            "value": 1261545,
+            "unit": "ns/op\t   29650 B/op\t     180 allocs/op",
+            "extra": "3865 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_5",
+            "value": 2090401,
+            "unit": "ns/op\t   28408 B/op\t     178 allocs/op",
+            "extra": "555 times\n2 procs"
           }
         ]
       }
