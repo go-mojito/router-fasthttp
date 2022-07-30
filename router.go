@@ -130,8 +130,7 @@ func (r *Router) WithRoute(method string, path string, handler interface{}) erro
 		log.Field("method", method).Field("path", path).Error("The fasthttp router implementation unfortunately does not support this HTTP method")
 		return errors.New("the given HTTP method is not available on this router")
 	}
-	r.Routes.Add(path, method, h)
-	return nil
+	return r.Routes.Add(path, method, h)
 }
 
 // WithNotFoundHandler will set the not found handler for the router
