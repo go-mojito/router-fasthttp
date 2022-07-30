@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1659223218668,
+  "lastUpdate": 1659223559030,
   "repoUrl": "https://github.com/go-mojito/router-fasthttp",
   "entries": {
     "Benchmark": [
@@ -2034,6 +2034,54 @@ window.BENCHMARK_DATA = {
             "value": 2907184,
             "unit": "ns/op\t   29405 B/op\t     181 allocs/op",
             "extra": "378 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "0SkillAllLuck@pm.me",
+            "name": "Cedric Lewe",
+            "username": "0SkillAllLuck"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "28a371c7feced18c5ace4ce66bc13558991d0ea0",
+          "message": "fix(ci): Only run benchmark once (#13)",
+          "timestamp": "2022-07-31T01:25:21+02:00",
+          "tree_id": "f0e2fd25fd1654e29f5ae71b4471dd85af0ad8fe",
+          "url": "https://github.com/go-mojito/router-fasthttp/commit/28a371c7feced18c5ace4ce66bc13558991d0ea0"
+        },
+        "date": 1659223558595,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 281190,
+            "unit": "ns/op\t   31010 B/op\t     212 allocs/op",
+            "extra": "3739 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 251637,
+            "unit": "ns/op\t   29454 B/op\t     181 allocs/op",
+            "extra": "4312 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_1",
+            "value": 642460,
+            "unit": "ns/op\t   29575 B/op\t     181 allocs/op",
+            "extra": "4526 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_5",
+            "value": 1479538,
+            "unit": "ns/op\t   28389 B/op\t     178 allocs/op",
+            "extra": "793 times\n2 procs"
           }
         ]
       }
