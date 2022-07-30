@@ -1,3 +1,8 @@
+<p align="center">
+    <img src="/.github/assets/gopher.png"
+        height="300">
+</p>
+
 <h1 align="center"><strong>fasthttp for Mojito</strong></h1>
 <p align="center">
     <a href="https://goreportcard.com/report/github.com/go-mojito/router-fasthttp" alt="Go Report Card">
@@ -39,18 +44,28 @@ fasthttp for Mojito provides a fasthttp Router implementation that was designed 
         <img src="https://sonarcloud.io/api/project_badges/measure?project=go-mojito_router-fasthttp&metric=bugs" /></a>
 </p>
 
-<p align="center"><strong>How to register</strong></p>
-<p align="center">To register the fasthttp router as default, do the following in your main file</p>
+<p align="center"><strong>Quickstart</strong></p>
+<p align="center">To start using fasthttp as your router just enable it as the default router like this:</p>
 
 ```go
 func init() {
     fasthttp.AsDefault()
 }
 ```
-<p align="center">To register fasthttp as a named router, do the following in your main file</p>
+
+<p align="center">Or to use fasthttp as a secondary router you can register it as a named router like this:</p>
 
 ```go
 func init() {
     fasthttp.As("myRouter")
 }
 ```
+
+<p align="center"><strong>Documentation</strong></p>
+<p align="center">
+	Read our
+	<a href="https://go-mojito.infinytum.co/docs">Documentation</a>, check out the 
+	<a href="https://go-mojito.infinytum.co/">Project Website</a>.
+</p>
+
+<p align="center"><sub>Icon made with <a href="https://gopherize.me">Gopherize</a> and <a href="https://www.flaticon.com/free-icon/mojito_920710">flaticon</a>.</sub></p>
