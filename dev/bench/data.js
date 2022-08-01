@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1659224601666,
+  "lastUpdate": 1659374104927,
   "repoUrl": "https://github.com/go-mojito/router-fasthttp",
   "entries": {
     "Benchmark": [
@@ -2130,6 +2130,54 @@ window.BENCHMARK_DATA = {
             "value": 2090401,
             "unit": "ns/op\t   28408 B/op\t     178 allocs/op",
             "extra": "555 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e8b284da6cfecd6d467aba9242be40d1ad536787",
+          "message": "build(deps): Bump github.com/go-mojito/mojito from 0.0.9 to 0.0.11 (#15)\n\nBumps [github.com/go-mojito/mojito](https://github.com/go-mojito/mojito) from 0.0.9 to 0.0.11.\r\n- [Release notes](https://github.com/go-mojito/mojito/releases)\r\n- [Commits](https://github.com/go-mojito/mojito/compare/v0.0.9...v0.0.11)\r\n\r\n---\r\nupdated-dependencies:\r\n- dependency-name: github.com/go-mojito/mojito\r\n  dependency-type: direct:production\r\n  update-type: version-update:semver-patch\r\n...\r\n\r\nSigned-off-by: dependabot[bot] <support@github.com>\r\n\r\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2022-08-01T19:14:24+02:00",
+          "tree_id": "ee71b3d7cc2bb1ef43b7a15341543a53e60f7fcd",
+          "url": "https://github.com/go-mojito/router-fasthttp/commit/e8b284da6cfecd6d467aba9242be40d1ad536787"
+        },
+        "date": 1659374104421,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 335294,
+            "unit": "ns/op\t   30916 B/op\t     212 allocs/op",
+            "extra": "3225 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 298825,
+            "unit": "ns/op\t   29535 B/op\t     181 allocs/op",
+            "extra": "3492 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_1",
+            "value": 309528,
+            "unit": "ns/op\t   29567 B/op\t     181 allocs/op",
+            "extra": "3864 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_5",
+            "value": 1829016,
+            "unit": "ns/op\t   29258 B/op\t     180 allocs/op",
+            "extra": "3018 times\n2 procs"
           }
         ]
       }
