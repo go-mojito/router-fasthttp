@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1660685842072,
+  "lastUpdate": 1660928607416,
   "repoUrl": "https://github.com/go-mojito/router-fasthttp",
   "entries": {
     "Benchmark": [
@@ -2226,6 +2226,54 @@ window.BENCHMARK_DATA = {
             "value": 2075022,
             "unit": "ns/op\t   28505 B/op\t     178 allocs/op",
             "extra": "582 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d69b8256147723c4860ab180dc8f43fcdab9db23",
+          "message": "build(deps): Bump github.com/go-mojito/mojito from 0.0.11 to 0.0.12 (#17)",
+          "timestamp": "2022-08-19T19:02:43+02:00",
+          "tree_id": "3fd6874bf5e49b1969c8929f958e09e02e2a0e59",
+          "url": "https://github.com/go-mojito/router-fasthttp/commit/d69b8256147723c4860ab180dc8f43fcdab9db23"
+        },
+        "date": 1660928605736,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 502810,
+            "unit": "ns/op\t   31168 B/op\t     212 allocs/op",
+            "extra": "2145 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 493097,
+            "unit": "ns/op\t   29495 B/op\t     181 allocs/op",
+            "extra": "2748 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_1",
+            "value": 491869,
+            "unit": "ns/op\t   29387 B/op\t     180 allocs/op",
+            "extra": "2403 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_5",
+            "value": 477168,
+            "unit": "ns/op\t   29475 B/op\t     181 allocs/op",
+            "extra": "2473 times\n2 procs"
           }
         ]
       }
