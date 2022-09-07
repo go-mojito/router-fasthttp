@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1662581229130,
+  "lastUpdate": 1662581505442,
   "repoUrl": "https://github.com/go-mojito/router-fasthttp",
   "entries": {
     "Benchmark": [
@@ -2370,6 +2370,54 @@ window.BENCHMARK_DATA = {
             "value": 1672755,
             "unit": "ns/op\t   28487 B/op\t     178 allocs/op",
             "extra": "675 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "508933129b9496b52f406611a492c0b1cacd391f",
+          "message": "build(deps): Bump actions/checkout from 2 to 3 (#20)\n\nBumps [actions/checkout](https://github.com/actions/checkout) from 2 to 3.\r\n- [Release notes](https://github.com/actions/checkout/releases)\r\n- [Changelog](https://github.com/actions/checkout/blob/main/CHANGELOG.md)\r\n- [Commits](https://github.com/actions/checkout/compare/v2...v3)\r\n\r\n---\r\nupdated-dependencies:\r\n- dependency-name: actions/checkout\r\n  dependency-type: direct:production\r\n  update-type: version-update:semver-major\r\n...\r\n\r\nSigned-off-by: dependabot[bot] <support@github.com>\r\n\r\nSigned-off-by: dependabot[bot] <support@github.com>\r\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2022-09-07T22:10:54+02:00",
+          "tree_id": "d365c375beed157529d70aa1db54912e89e2e9cc",
+          "url": "https://github.com/go-mojito/router-fasthttp/commit/508933129b9496b52f406611a492c0b1cacd391f"
+        },
+        "date": 1662581503675,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 411282,
+            "unit": "ns/op\t   31029 B/op\t     212 allocs/op",
+            "extra": "2644 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 358437,
+            "unit": "ns/op\t   29602 B/op\t     181 allocs/op",
+            "extra": "3184 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_1",
+            "value": 390720,
+            "unit": "ns/op\t   29407 B/op\t     181 allocs/op",
+            "extra": "3252 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_5",
+            "value": 740368,
+            "unit": "ns/op\t   29615 B/op\t     181 allocs/op",
+            "extra": "3201 times\n2 procs"
           }
         ]
       }
