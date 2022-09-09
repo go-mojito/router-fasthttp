@@ -3,7 +3,7 @@ module github.com/go-mojito/router-fasthttp
 go 1.18
 
 require (
-	github.com/fasthttp/router v1.4.11
+	github.com/fasthttp/router v1.4.12
 	github.com/go-mojito/mojito v0.0.13
 	github.com/infinytum/structures v0.0.2
 	github.com/valyala/fasthttp v1.40.0
