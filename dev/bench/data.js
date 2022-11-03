@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1662765159672,
+  "lastUpdate": 1667516918639,
   "repoUrl": "https://github.com/go-mojito/router-fasthttp",
   "entries": {
     "Benchmark": [
@@ -2466,6 +2466,54 @@ window.BENCHMARK_DATA = {
             "value": 1437891,
             "unit": "ns/op\t   29665 B/op\t     180 allocs/op",
             "extra": "3440 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6c165d140df3fa83b78c57e97f222115a6c87b4d",
+          "message": "build(deps): Bump github.com/valyala/fasthttp from 1.40.0 to 1.41.0 (#22)\n\nBumps [github.com/valyala/fasthttp](https://github.com/valyala/fasthttp) from 1.40.0 to 1.41.0.\r\n- [Release notes](https://github.com/valyala/fasthttp/releases)\r\n- [Commits](https://github.com/valyala/fasthttp/compare/v1.40.0...v1.41.0)\r\n\r\n---\r\nupdated-dependencies:\r\n- dependency-name: github.com/valyala/fasthttp\r\n  dependency-type: direct:production\r\n  update-type: version-update:semver-minor\r\n...\r\n\r\nSigned-off-by: dependabot[bot] <support@github.com>\r\n\r\nSigned-off-by: dependabot[bot] <support@github.com>\r\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2022-11-04T00:08:00+01:00",
+          "tree_id": "d6b9294670b3fa1e1d5f6144fb3f6cc53f1397cb",
+          "url": "https://github.com/go-mojito/router-fasthttp/commit/6c165d140df3fa83b78c57e97f222115a6c87b4d"
+        },
+        "date": 1667516918225,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "Benchmark_Router_Handler",
+            "value": 333970,
+            "unit": "ns/op\t   30998 B/op\t     204 allocs/op",
+            "extra": "3230 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_Not_Found",
+            "value": 303670,
+            "unit": "ns/op\t   29662 B/op\t     181 allocs/op",
+            "extra": "3630 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_1",
+            "value": 997467,
+            "unit": "ns/op\t   29844 B/op\t     181 allocs/op",
+            "extra": "3854 times\n2 procs"
+          },
+          {
+            "name": "Benchmark_Router_Handler_With_Middleware_5",
+            "value": 2019342,
+            "unit": "ns/op\t   28509 B/op\t     178 allocs/op",
+            "extra": "577 times\n2 procs"
           }
         ]
       }
