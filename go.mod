@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/fasthttp/router v1.4.13
 	github.com/go-mojito/mojito v0.0.14
-	github.com/infinytum/structures v0.0.2
+	github.com/infinytum/structures v0.0.3
 	github.com/valyala/fasthttp v1.41.0
 )
 
