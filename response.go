@@ -37,25 +37,10 @@ func (r *Response) WriteHeader(status int) {
 func (r *Response) setHeaders(body []byte) {
 	// Because of special header handling in fasthttp, we need to manually
 	// set the header here.
-	hasContentType := false
 	for k, vv := range r.header {
-		if k == fasthttp.HeaderContentType {
-			hasContentType = true
-		}
-
 		for _, v := range vv {
 			r.ctx.Response.Header.Add(k, v)
 		}
-	}
-	if !hasContentType {
-		// From net/http.ResponseWriter.Write:
-		// If the Header does not contain a Content-Type line, Write adds a Content-Type set
-		// to the result of passing the initial 512 bytes of written data to DetectContentType.
-		l := 512
-		if len(body) < 512 {
-			l = len(body)
-		}
-		r.ctx.Response.Header.Set(fasthttp.HeaderContentType, http.DetectContentType(body[:l]))
 	}
 }
 
