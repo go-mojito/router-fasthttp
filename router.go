@@ -88,7 +88,7 @@ func (r *Router) WithGroup(path string, callback func(group router.Group)) error
 func (r *Router) WithRoute(method string, path string, handler interface{}) error {
 	h, err := router.GetOrCreateHandler(handler)
 	if err != nil {
-		log.Field("method", method).Field("path", path).Errorf("Error creating rotue handler: %s", err)
+		log.Field("method", method).Field("path", path).Errorf("Error creating route handler: %s", err)
 		return err
 	}
 
