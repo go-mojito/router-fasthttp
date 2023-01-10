@@ -40,7 +40,7 @@ func startServerBench(b *testing.B, r *Router) {
 
 func handler(r router.Router, m string) {
 	r.WithRoute(m, "/", func(ctx router.Context) error {
-		ctx.String("OK")
+		ctx.Response().WriteString("OK")
 		return nil
 	})
 }
@@ -81,7 +81,7 @@ func Test_Router_GET(t *testing.T) {
 func Test_Router_GET_Params(t *testing.T) {
 	r := NewRouter()
 	r.GET("/:name", func(ctx router.Context) error {
-		ctx.String(fmt.Sprintf("Hello %s", ctx.Request().Param("name")))
+		ctx.Response().WriteString(fmt.Sprintf("Hello %s", ctx.Request().Param("name")))
 		return nil
 	})
 
@@ -322,7 +322,7 @@ func Test_Router_WithErrorHandler(t *testing.T) {
 func Benchmark_Router_Handler(b *testing.B) {
 	r := NewRouter()
 	r.GET("/", func(ctx router.Context) error {
-		ctx.String(helloWorld)
+		ctx.Response().WriteString(helloWorld)
 		return nil
 	})
 
@@ -339,7 +339,7 @@ func Benchmark_Router_Handler(b *testing.B) {
 func Benchmark_Router_Handler_Not_Found(b *testing.B) {
 	r := NewRouter()
 	r.GET("/", func(ctx router.Context) error {
-		ctx.String(helloWorld)
+		ctx.Response().WriteString(helloWorld)
 		return nil
 	})
 
@@ -360,7 +360,7 @@ func Benchmark_Router_Handler_With_Middleware_1(b *testing.B) {
 		return next()
 	})
 	r.GET("/", func(ctx router.Context) error {
-		ctx.String(helloWorld)
+		ctx.Response().WriteString(helloWorld)
 		return nil
 	})
 
@@ -397,7 +397,7 @@ func Benchmark_Router_Handler_With_Middleware_5(b *testing.B) {
 		return next()
 	})
 	r.GET("/", func(ctx router.Context) error {
-		ctx.String(helloWorld)
+		ctx.Response().WriteString(helloWorld)
 		return nil
 	})
 
