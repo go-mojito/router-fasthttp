@@ -1,6 +1,7 @@
 package fasthttp
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"net/http"
@@ -21,6 +22,8 @@ type Router struct {
 	Routes     structures.Table[string, string, router.Handler]
 	*fhttp.Server
 	*fhttpRouter.Router
+
+	ErrorHandler router.Handler
 }
 
 // NewRouter will create new instance of the mojito fasthttp router implementation
@@ -109,23 +112,23 @@ func (r *Router) WithRoute(method string, path string, handler interface{}) erro
 
 	switch method {
 	case http.MethodGet:
-		r.Router.GET(path, withMojitoHandler(h))
+		r.Router.GET(path, r.withMojitoHandler(h))
 	case http.MethodHead:
-		r.Router.HEAD(path, withMojitoHandler(h))
+		r.Router.HEAD(path, r.withMojitoHandler(h))
 	case http.MethodPost:
-		r.Router.POST(path, withMojitoHandler(h))
+		r.Router.POST(path, r.withMojitoHandler(h))
 	case http.MethodPut:
-		r.Router.PUT(path, withMojitoHandler(h))
+		r.Router.PUT(path, r.withMojitoHandler(h))
 	case http.MethodDelete:
-		r.Router.DELETE(path, withMojitoHandler(h))
+		r.Router.DELETE(path, r.withMojitoHandler(h))
 	case http.MethodConnect:
-		r.Router.CONNECT(path, withMojitoHandler(h))
+		r.Router.CONNECT(path, r.withMojitoHandler(h))
 	case http.MethodOptions:
-		r.Router.OPTIONS(path, withMojitoHandler(h))
+		r.Router.OPTIONS(path, r.withMojitoHandler(h))
 	case http.MethodTrace:
-		r.Router.TRACE(path, withMojitoHandler(h))
+		r.Router.TRACE(path, r.withMojitoHandler(h))
 	case http.MethodPatch:
-		r.Router.PATCH(path, withMojitoHandler(h))
+		r.Router.PATCH(path, r.withMojitoHandler(h))
 	default:
 		log.Field("method", method).Field("path", path).Error("The fasthttp router implementation unfortunately does not support this HTTP method")
 		return errors.New("the given HTTP method is not available on this router")
@@ -139,7 +142,7 @@ func (r *Router) WithNotFoundHandler(handler interface{}) error {
 		log.Errorf("Error creating default handler: %s", err)
 		return err
 	} else {
-		r.Router.NotFound = withMojitoHandler(h)
+		r.Router.NotFound = r.withMojitoHandler(h)
 	}
 	return nil
 }
@@ -150,21 +153,20 @@ func (r *Router) WithMethodNotAllowedHandler(handler interface{}) error {
 		log.Errorf("Error creating default handler: %s", err)
 		return err
 	} else {
-		r.Router.MethodNotAllowed = withMojitoHandler(h)
+		r.Router.MethodNotAllowed = r.withMojitoHandler(h)
 	}
 	return nil
 }
 
 // WithErrorHandler will set the error handler for the router
 func (r *Router) WithErrorHandler(handler interface{}) error {
-	if h, err := router.GetOrCreateHandler(handler); err != nil {
+	h, err := router.GetOrCreateHandler(handler)
+	if err != nil {
 		log.Errorf("Error creating error handler: %s", err)
 		return err
-	} else {
-		r.Router.PanicHandler = func(ctx *fhttp.RequestCtx, _ interface{}) {
-			withMojitoHandler(h)(ctx)
-		}
 	}
+	r.ErrorHandler = h
+	r.Router.PanicHandler = r.onError
 	return nil
 }
 
@@ -195,7 +197,23 @@ func (r *Router) Shutdown() error {
 	return r.Server.Shutdown()
 }
 
-func withMojitoHandler(handler router.Handler) fasthttp.RequestHandler {
+func (r *Router) onError(reqCtx *fhttp.RequestCtx, rec interface{}) {
+	httpReq := &http.Request{}
+	if err := fasthttpadaptor.ConvertRequest(reqCtx, httpReq, true); err != nil {
+		reqCtx.Error(err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	mreq := router.NewRequest(httpReq)
+	mres := router.NewResponse(NewResponse(reqCtx))
+	ctx, cancel := router.NewContext(mreq, mres)
+	cancel(fmt.Errorf("%v", rec))
+	if err := r.ErrorHandler.Serve(ctx); err != nil {
+		panic(err)
+	}
+}
+
+func (r *Router) withMojitoHandler(handler router.Handler) fasthttp.RequestHandler {
 	return func(reqCtx *fasthttp.RequestCtx) {
 		httpReq := &http.Request{}
 		if err := fasthttpadaptor.ConvertRequest(reqCtx, httpReq, true); err != nil {
@@ -211,9 +229,16 @@ func withMojitoHandler(handler router.Handler) fasthttp.RequestHandler {
 		req.SetParams(params)
 
 		res := router.NewResponse(NewResponse(reqCtx))
-		ctx := router.NewContext(req, res)
-		if err := handler.Serve(ctx); err != nil {
-			panic(err)
+		ctx, cancel := router.NewContext(req, res)
+		cancel(handler.Serve(ctx))
+		if ctx.Err() != context.Canceled {
+			if r.ErrorHandler != nil {
+				if err := r.ErrorHandler.Serve(ctx); err != context.Canceled {
+					panic(err)
+				}
+			} else {
+				panic(ctx.Err())
+			}
 		}
 	}
 }
