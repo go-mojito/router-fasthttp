@@ -1,7 +1,7 @@
 github.com/andybalholm/brotli v1.0.4 h1:V7DdXeJtZscaqfNuAdSRuRFzuiKlHSC/Zh3zl9qY3JY=
 github.com/andybalholm/brotli v1.0.4/go.mod h1:fO7iG3H7G2nSZ7m0zPUDn85XEX2GTukHGRSepvi9Eig=
-github.com/fasthttp/router v1.4.15 h1:ERaILezYX6ks1I+Z2v5qY4vqiQKnujauo9nV6M+HIOg=
-github.com/fasthttp/router v1.4.15/go.mod h1:NFNlTCilbRVkeLc+E5JDkcxUdkpiJGKDL8Zy7Ey2JTI=
+github.com/fasthttp/router v1.4.16 h1:faWJ9OtaHvAtodreyQLps58M80YFNzphMJtOJzeESXs=
+github.com/fasthttp/router v1.4.16/go.mod h1:NFNlTCilbRVkeLc+E5JDkcxUdkpiJGKDL8Zy7Ey2JTI=
 github.com/go-mojito/mojito v0.0.16 h1:OHv6zmI89ofbhGsbXrQZpZX1HR08xF6XefU8HFAGRWE=
 github.com/go-mojito/mojito v0.0.16/go.mod h1:6gYbGCZFeONuB0eTJQJqwg31+VEoP8aiXeKSH4RYDjM=
 github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
