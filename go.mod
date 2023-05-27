@@ -1,6 +1,6 @@
 module github.com/go-mojito/router-fasthttp
 
-go 1.19
+go 1.20
 
 require (
 	github.com/fasthttp/router v1.4.19
