@@ -233,7 +233,7 @@ func (r *Router) withMojitoHandler(handler router.Handler) fasthttp.RequestHandl
 		cancel(handler.Serve(ctx))
 		if ctx.Err() != context.Canceled {
 			if r.ErrorHandler != nil {
-				if err := r.ErrorHandler.Serve(ctx); err != context.Canceled {
+				if err := r.ErrorHandler.Serve(ctx); err != context.Canceled && err != nil {
 					panic(err)
 				}
 			} else {
