@@ -6,7 +6,7 @@ require (
 	github.com/fasthttp/router v1.5.3
 	github.com/go-mojito/mojito v0.0.19
 	github.com/infinytum/structures v0.0.3
-	github.com/valyala/fasthttp v1.57.0
+	github.com/valyala/fasthttp v1.58.0
 )
 
 require (
