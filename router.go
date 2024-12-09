@@ -91,14 +91,14 @@ func (r *Router) WithGroup(path string, callback func(group router.Group)) error
 func (r *Router) WithRoute(method string, path string, handler interface{}) error {
 	h, err := router.GetOrCreateHandler(handler)
 	if err != nil {
-		log.Field("method", method).Field("path", path).Errorf("Error creating route handler: %s", err)
+		log.With("method", method, "path", path, "err", err).Error("Error creating route handler")
 		return err
 	}
 
 	// Chain router-wide middleware to the (new) handler
 	for _, middleware := range r.Middleware {
 		if err := h.AddMiddleware(middleware); err != nil {
-			log.Field("method", method).Field("path", path).Errorf("Failed to chain middleware to route: %s", err)
+			log.With("method", method, "path", path, "err", err).Error("Failed to chain middleware to route")
 			return err
 		}
 	}
@@ -130,7 +130,7 @@ func (r *Router) WithRoute(method string, path string, handler interface{}) erro
 	case http.MethodPatch:
 		r.Router.PATCH(path, r.withMojitoHandler(h))
 	default:
-		log.Field("method", method).Field("path", path).Error("The fasthttp router implementation unfortunately does not support this HTTP method")
+		log.With("method", method, "path", path).Error("The fasthttp router implementation unfortunately does not support this HTTP method")
 		return errors.New("the given HTTP method is not available on this router")
 	}
 	return r.Routes.Add(path, method, h)
@@ -139,7 +139,7 @@ func (r *Router) WithRoute(method string, path string, handler interface{}) erro
 // WithNotFoundHandler will set the not found handler for the router
 func (r *Router) WithNotFoundHandler(handler interface{}) error {
 	if h, err := router.GetOrCreateHandler(handler); err != nil {
-		log.Errorf("Error creating default handler: %s", err)
+		log.With("err", err).Error("Error creating not found handler")
 		return err
 	} else {
 		r.Router.NotFound = r.withMojitoHandler(h)
@@ -150,7 +150,7 @@ func (r *Router) WithNotFoundHandler(handler interface{}) error {
 // WithMethodNotAllowedHandler will set the not allowed handler for the router
 func (r *Router) WithMethodNotAllowedHandler(handler interface{}) error {
 	if h, err := router.GetOrCreateHandler(handler); err != nil {
-		log.Errorf("Error creating default handler: %s", err)
+		log.With("err", err).Error("Error creating not allowed handler")
 		return err
 	} else {
 		r.Router.MethodNotAllowed = r.withMojitoHandler(h)
@@ -160,13 +160,13 @@ func (r *Router) WithMethodNotAllowedHandler(handler interface{}) error {
 
 // WithErrorHandler will set the error handler for the router
 func (r *Router) WithErrorHandler(handler interface{}) error {
-	h, err := router.GetOrCreateHandler(handler)
-	if err != nil {
-		log.Errorf("Error creating error handler: %s", err)
+	if h, err := router.GetOrCreateHandler(handler); err != nil {
+		log.With("err", err).Error("Error creating error handler")
 		return err
+	} else {
+		r.ErrorHandler = h
+		r.Router.PanicHandler = r.onError
 	}
-	r.ErrorHandler = h
-	r.Router.PanicHandler = r.onError
 	return nil
 }
 
@@ -175,7 +175,7 @@ func (r *Router) WithMiddleware(handler interface{}) error {
 	for _, rm := range r.Routes.ToMap() {
 		for _, h := range rm {
 			if err := h.AddMiddleware(handler); err != nil {
-				log.Error(err)
+				log.With("err", err).Error("Failed to chain middleware to route")
 				return err
 			}
 		}
