@@ -3,7 +3,7 @@ package fasthttp
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"testing"
@@ -73,7 +73,7 @@ func Test_Router_GET(t *testing.T) {
 	if res.StatusCode != 200 {
 		t.Errorf(expectedStatus, 200, res.StatusCode)
 	}
-	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
+	if body, _ := io.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
 	}
 }
@@ -95,7 +95,7 @@ func Test_Router_GET_Params(t *testing.T) {
 	if res.StatusCode != 200 {
 		t.Errorf(expectedStatus, 200, res.StatusCode)
 	}
-	if body, _ := ioutil.ReadAll(res.Body); string(body) != "Hello world" {
+	if body, _ := io.ReadAll(res.Body); string(body) != "Hello world" {
 		t.Errorf(expectedBody, body)
 	}
 }
@@ -130,7 +130,7 @@ func Test_Router_POST(t *testing.T) {
 	if res.StatusCode != 200 {
 		t.Errorf(expectedStatus, 200, res.StatusCode)
 	}
-	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
+	if body, _ := io.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
 	}
 }
@@ -149,7 +149,7 @@ func Test_Router_PUT(t *testing.T) {
 	if res.StatusCode != 200 {
 		t.Errorf(expectedStatus, 200, res.StatusCode)
 	}
-	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
+	if body, _ := io.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
 	}
 }
@@ -168,7 +168,7 @@ func Test_Router_DELETE(t *testing.T) {
 	if res.StatusCode != 200 {
 		t.Errorf(expectedStatus, 200, res.StatusCode)
 	}
-	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
+	if body, _ := io.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
 	}
 }
@@ -187,7 +187,7 @@ func Test_Router_CONNECT(t *testing.T) {
 	if res.StatusCode != 200 {
 		t.Errorf(expectedStatus, 200, res.StatusCode)
 	}
-	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
+	if body, _ := io.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
 	}
 }
@@ -206,7 +206,7 @@ func Test_Router_OPTIONS(t *testing.T) {
 	if res.StatusCode != 200 {
 		t.Errorf(expectedStatus, 200, res.StatusCode)
 	}
-	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
+	if body, _ := io.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
 	}
 }
@@ -225,7 +225,7 @@ func Test_Router_TRACE(t *testing.T) {
 	if res.StatusCode != 200 {
 		t.Errorf(expectedStatus, 200, res.StatusCode)
 	}
-	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
+	if body, _ := io.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
 	}
 }
@@ -244,7 +244,7 @@ func Test_Router_PATCH(t *testing.T) {
 	if res.StatusCode != 200 {
 		t.Errorf(expectedStatus, 200, res.StatusCode)
 	}
-	if body, _ := ioutil.ReadAll(res.Body); string(body) != "OK" {
+	if body, _ := io.ReadAll(res.Body); string(body) != "OK" {
 		t.Errorf(expectedBody, body)
 	}
 }
@@ -266,7 +266,7 @@ func Test_Router_WithNotFoundHandler(t *testing.T) {
 	if res.StatusCode != 404 {
 		t.Errorf(expectedStatus, 404, res.StatusCode)
 	}
-	if body, _ := ioutil.ReadAll(res.Body); string(body) != "Not found" {
+	if body, _ := io.ReadAll(res.Body); string(body) != "Not found" {
 		t.Errorf(expectedBody, body)
 	}
 }
@@ -289,7 +289,7 @@ func Test_Router_WithMethodNotAllowedHandler(t *testing.T) {
 	if res.StatusCode != 403 {
 		t.Errorf(expectedStatus, 403, res.StatusCode)
 	}
-	if body, _ := ioutil.ReadAll(res.Body); string(body) != "Method not allowed" {
+	if body, _ := io.ReadAll(res.Body); string(body) != "Method not allowed" {
 		t.Errorf(expectedBody, body)
 	}
 }
@@ -314,7 +314,7 @@ func Test_Router_WithErrorHandler(t *testing.T) {
 	if res.StatusCode != 500 {
 		t.Errorf(expectedStatus, 500, res.StatusCode)
 	}
-	if body, _ := ioutil.ReadAll(res.Body); string(body) != "Internal Server Error" {
+	if body, _ := io.ReadAll(res.Body); string(body) != "Internal Server Error" {
 		t.Errorf(expectedBody, body)
 	}
 }
