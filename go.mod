@@ -1,7 +1,6 @@
 module github.com/go-mojito/router-fasthttp
 
 go 1.23
-
 require (
 	github.com/fasthttp/router v1.5.3
 	github.com/go-mojito/mojito v0.0.19
@@ -18,6 +17,6 @@ require (
 	github.com/mitchellh/hashstructure/v2 v2.0.2 // indirect
 	github.com/savsgio/gotils v0.0.0-20240704082632-aef3928b8a38 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	golang.org/x/net v0.32.0 // indirect
-	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/net v0.36.0 // indirect
+	golang.org/x/text v0.22.0 // indirect
 )
